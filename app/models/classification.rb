@@ -3,11 +3,11 @@ class Classification < ActiveRecord::Base
   has_many :boats, through: :boat_classifications
 
   def self.my_all
-    # returns all classifications (FAILED - 8)
+    self.all
   end
 
   def self.longest
-    # returns the classifications for the longest boat (FAILED - 9)
+    Classification.boats
   end
 
 end
