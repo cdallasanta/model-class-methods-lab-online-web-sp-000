@@ -12,14 +12,16 @@ class Captain < ActiveRecord::Base
     end
   end
 
-  def self.talented_seafarers
-    sailboat = Classification.find_by(name:"Sailboat")
+  def self.motorboaters
     motorboat = Classification.find_by(name:"Motorboat")
     Captain.select do |captain|
-      captain.boats.detect do |boat|
-        boat.classifications.include?(sailboat) &&
-        boat.classifications.include?(motorboat)
-      end
+      captain.boats.detect {|boat| boat.classifications.include?(motorboat)}
+    end
+  end
+
+  def self.talented_seafarers
+    Captain.select do |captain|
+      Captain.sailors.include?(captain) && Captain.motorboaters.include?(captain)
     end
   end
 
