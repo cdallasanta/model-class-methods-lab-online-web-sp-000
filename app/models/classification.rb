@@ -15,6 +15,7 @@ class Classification < ActiveRecord::Base
         end
       end
     end
+    longest_boat
   end
 
 end
