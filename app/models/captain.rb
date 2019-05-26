@@ -26,9 +26,8 @@ class Captain < ActiveRecord::Base
   end
 
   def self.non_sailors
-    sailboat = Classification.find_by(name:"Sailboat")
     Captain.select do |captain|
-      captain.boats.detect {|boat| !boat.classifications.include?(sailboat)}
+      !Captain.sailors.include?(captain)
     end
   end
 end
