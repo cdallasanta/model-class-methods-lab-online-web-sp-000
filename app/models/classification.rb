@@ -7,7 +7,14 @@ class Classification < ActiveRecord::Base
   end
 
   def self.longest
-    Classification.boats
+    longest_boat = Boat.all.first
+    Classification.all.each do |c|
+      c.boat.each do |boat|
+        if boat.length > longest_boat.legnth
+          longest_boat = boat
+        end
+      end
+    end
   end
 
 end
