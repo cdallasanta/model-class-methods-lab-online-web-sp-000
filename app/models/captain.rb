@@ -26,6 +26,9 @@ class Captain < ActiveRecord::Base
   end
 
   def self.non_sailors
-    Captain.joins(boats: :classifications).where.not("classifications.name = 'Sailboat'").distinct
+    sailboat = Classification.find_by(name:"Sailboat")
+    Captain.select do |captain|
+      captain.boats.detect {|boat| !boat.classifications.include?(sailboat)}
+    end
   end
 end
